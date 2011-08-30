@@ -1,5 +1,11 @@
 Revision history for Sub::Spec::To::Text
 
+0.02     2011-08-30
+
+         No functional changes. Add empty placeholder module
+         Sub::Spec::To::Text. Fix example in Synopsis.
+
+
 0.01     2011-08-24
 
          First release.

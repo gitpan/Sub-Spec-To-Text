@@ -12,7 +12,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(spec_to_usage);
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 our %SPEC;
 
@@ -188,11 +188,12 @@ Sub::Spec::To::Text::Usage - Generate usage/help message from sub spec
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
  use Sub::Spec::To::Text::Usage qw(spec_to_usage);
+ my $text = spec_to_usage(spec=>$spec, ...);
 
 =head1 DESCRIPTION
 

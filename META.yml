@@ -1,5 +1,5 @@
 ---
-abstract: 'Generate usage/help message from sub spec'
+abstract: 'Generate text documentation from spec'
 author:
   - 'Steven Haryanto <stevenharyanto@gmail.com>'
 build_requires:
@@ -21,4 +21,4 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/Sub-Spec-To-Text/
   repository: http://github.com/sharyanto/perl-Sub-Spec-To-Text
-version: 0.01
+version: 0.02

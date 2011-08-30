@@ -12,12 +12,12 @@ my %module_build_args = (
   'configure_requires' => {
     'Module::Build' => '0.3601'
   },
-  'dist_abstract' => 'Generate usage/help message from sub spec',
+  'dist_abstract' => 'Generate text documentation from spec',
   'dist_author' => [
     'Steven Haryanto <stevenharyanto@gmail.com>'
   ],
   'dist_name' => 'Sub-Spec-To-Text',
-  'dist_version' => '0.01',
+  'dist_version' => '0.02',
   'license' => 'perl',
   'module_name' => 'Sub::Spec::To::Text',
   'recommends' => {},

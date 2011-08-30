@@ -1,13 +1,19 @@
 NAME
-    Sub::Spec::To::Text::Usage - Generate usage/help message from sub spec
+    Sub::Spec::To::Text - Generate text documentation from spec
 
 VERSION
-    version 0.01
+    version 0.02
 
 SYNOPSIS
-     use Sub::Spec::To::Text::Usage qw(spec_to_usage);
+     # use Sub::Spec::To::Text qw(spec_to_text);
+     # my $text = spec_to_text(spec=>$spec, ...);
 
 DESCRIPTION
+    EMPTY MODULE AT THE MOMENT.
+
+SEE ALSO
+    Sub::Spec::To::Text::Usage
+
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
 

@@ -1,5 +1,11 @@
 Revision history for Sub::Spec::To::Text
 
+0.03     2011-08-31
+
+         No functional changes. Updated because _parse_schema() is moved from
+         Sub::Spec::Utils to Data::Sah::Util.
+
+
 0.02     2011-08-30
 
          No functional changes. Add empty placeholder module

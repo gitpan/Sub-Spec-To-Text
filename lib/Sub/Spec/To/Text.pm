@@ -1,6 +1,6 @@
 package Sub::Spec::To::Text;
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 1;
 # ABSTRACT: Generate text documentation from spec
@@ -15,7 +15,7 @@ Sub::Spec::To::Text - Generate text documentation from spec
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

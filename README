@@ -2,7 +2,7 @@ NAME
     Sub::Spec::To::Text - Generate text documentation from spec
 
 VERSION
-    version 0.03
+    version 0.04
 
 SYNOPSIS
      # use Sub::Spec::To::Text qw(spec_to_text);

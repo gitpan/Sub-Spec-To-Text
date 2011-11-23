@@ -6,18 +6,18 @@ use 5.010;
 use strict;
 use warnings;
 
-use Data::Sah::Util;
+use Data::Sah;
 
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(spec_to_usage);
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 our %SPEC;
 
 sub _parse_schema {
-    Data::Sah::Util::_parse_schema(@_);
+    Data::Sah::normalize_schema($_[0]);
 }
 
 $SPEC{spec_to_usage} = {
@@ -154,7 +154,7 @@ sub spec_to_usage {
         }
 
         $usage .= sprintf("  --%-25s %s\n",
-                          $name . ($ah0->{required} ? "*" : "") .
+                          $name . ($ah0->{req} ? "*" : "") .
                               (defined($o) ? " [or arg ".($o+1).
                                   ($g ? "-last":"")."]" : ""),
                           $arg_desc);
@@ -188,7 +188,7 @@ Sub::Spec::To::Text::Usage - Generate usage/help message from sub spec
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -196,6 +196,41 @@ version 0.03
  my $text = spec_to_usage(spec=>$spec, ...);
 
 =head1 DESCRIPTION
+
+=head1 FUNCTIONS
+
+None are exported, but they are exportable.
+
+=head2 spec_to_usage(%args) -> [STATUS_CODE, ERR_MSG, RESULT]
+
+
+Generate usage text from spec.
+
+Returns a 3-element arrayref. STATUS_CODE is 200 on success, or an error code
+between 3xx-5xx (just like in HTTP). ERR_MSG is a string containing error
+message, RESULT is the actual result.
+
+Arguments (C<*> denotes required arguments):
+
+=over 4
+
+=item * B<command_name> => I<str>
+
+Name of command.
+
+=item * B<is_cmdline> => I<bool> (default C<0>)
+
+Name of options.
+
+=item * B<options_name> => I<str>
+
+Name of options.
+
+=item * B<spec>* => I<hash>
+
+The sub spec.
+
+=back
 
 =head1 AUTHOR
 

@@ -12,7 +12,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(spec_to_usage);
 
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 our %SPEC;
 
@@ -80,18 +80,18 @@ sub spec_to_usage {
     my $args  = $sub_spec->{args} // {};
     my $rargs = $sub_spec->{required_args};
     $args = { map {$_ => _parse_schema($args->{$_})} keys %$args };
-    my $has_cat = grep { $_->{clause_sets}[0]{arg_category} }
+    my $has_cat = grep { $_->[1]{arg_category} }
         values %$args;
     my $prev_cat;
     my $noted_star_req;
     for my $name (sort {
-        (($args->{$a}{clause_sets}[0]{arg_category} // "") cmp
-             ($args->{$b}{clause_sets}[0]{arg_category} // "")) ||
-                 (($args->{$a}{clause_sets}[0]{arg_pos} // 9999) <=>
-                      ($args->{$b}{clause_sets}[0]{arg_pos} // 9999)) ||
+        (($args->{$a}[1]{arg_category} // "") cmp
+             ($args->{$b}[1]{arg_category} // "")) ||
+                 (($args->{$a}[1]{arg_pos} // 9999) <=>
+                      ($args->{$b}[1]{arg_pos} // 9999)) ||
                           ($a cmp $b) } keys %$args) {
         my $arg = $args->{$name};
-        my $ah0 = $arg->{clause_sets}[0];
+        my $ah0 = $arg->[1];
 
         my $cat = $ah0->{arg_category} // "";
         if (!defined($prev_cat) || $prev_cat ne $cat) {
@@ -109,13 +109,13 @@ sub spec_to_usage {
 
         my $arg_desc = "";
 
-        if ($arg->{type} eq 'any') {
+        if ($arg->[0] eq 'any') {
             my @schemas = map {_parse_schema($_)} @{$ah0->{of}};
-            my @types   = map {$_->{type}} @schemas;
+            my @types   = map {$_->[0]} @schemas;
             @types      = sort List::MoreUtils::uniq(@types);
             $arg_desc  .= "[" . join("|", @types) . "]";
         } else {
-            $arg_desc  .= "[" . $arg->{type} . "]";
+            $arg_desc  .= "[" . $arg->[0] . "]";
         }
 
         my $o = $ah0->{arg_pos};
@@ -188,7 +188,7 @@ Sub::Spec::To::Text::Usage - Generate usage/help message from sub spec
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -201,44 +201,13 @@ version 0.04
 
 None are exported, but they are exportable.
 
-=head2 spec_to_usage(%args) -> [STATUS_CODE, ERR_MSG, RESULT]
-
-
-Generate usage text from spec.
-
-Returns a 3-element arrayref. STATUS_CODE is 200 on success, or an error code
-between 3xx-5xx (just like in HTTP). ERR_MSG is a string containing error
-message, RESULT is the actual result.
-
-Arguments (C<*> denotes required arguments):
-
-=over 4
-
-=item * B<command_name> => I<str>
-
-Name of command.
-
-=item * B<is_cmdline> => I<bool> (default C<0>)
-
-Name of options.
-
-=item * B<options_name> => I<str>
-
-Name of options.
-
-=item * B<spec>* => I<hash>
-
-The sub spec.
-
-=back
-
 =head1 AUTHOR
 
 Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Steven Haryanto.
+This software is copyright (c) 2012 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
